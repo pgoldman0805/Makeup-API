@@ -2,9 +2,9 @@
 <html>
     <head>
     </head>
-    <body ng-app="myApp" ng-controller="dataController">
-        
-        <form ng-controller="userChoice">
+    <body ng-app="myApp" >
+        <div ng-controller="userChoice">
+        <form >
             <label for="productType">Pick a product category</label>
             <select name="productType" ng-model="choice">
                 <option value="">Pick a product category</option>
@@ -19,9 +19,15 @@
                 <option value="mascara">Mascara</option>
                 <option value="nailpolish">Nail Polish</option>
             </select>
-            <input type="submit" value="Get makeup info" ng-click="setChoice(choice)"/>
+            <input type="submit" value="Get makeup info" ng-click="setChoice(choice)" ng-disabled="loading" />
+            <progress ng-show="loading"></progress>
         </form>
-        {{choice}}
+        <ul >
+          <li ng-repeat="product in products">
+            {{ product.name }}
+          </li>
+        </ul>
+            </div>
 <!--        <div ng-repeat="product in model">{{product}}</div>-->
         
         
