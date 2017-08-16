@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+    <head>
+    </head>
+    <body ng-app="myApp" ng-controller="dataController">
+        
+        <form ng-controller="userChoice">
+            <label for="productType">Pick a product category</label>
+            <select name="productType" ng-model="choice">
+                <option value="">Pick a product category</option>
+                <option value="blush">Blush</option>
+                <option value="bronzer">Bronzer</option>
+                <option value="eyebrow">Eyebrow</option>
+                <option value="eyeliner">Eyeliner</option>
+                <option value="eyeshadow">Eyeshadow</option>
+                <option value="foundation">Foundation</option>
+                <option value="lipliner">Lip liner</option>
+                <option value="lipstick">Lipstick</option>
+                <option value="mascara">Mascara</option>
+                <option value="nailpolish">Nail Polish</option>
+            </select>
+            <input type="submit" value="Get makeup info" ng-click="setChoice(choice)"/>
+        </form>
+        {{choice}}
+<!--        <div ng-repeat="product in model">{{product}}</div>-->
+        
+        
+        
+        
+        <!-- jQuery -->
+        <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+        
+        <!-- AngularJS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        
+        <script src="scripts/app.js"></script>
+    </body>
+</html>
