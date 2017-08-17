@@ -1,0 +1,10 @@
+.result-container h3, .result-container h4{
+    display: inline-block;
+}
+
+.productImg {
+    width: 150px;
+    height: 150px;
+    float: right;
+    display: inline-block;
+}

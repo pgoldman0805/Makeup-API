@@ -1,33 +1,37 @@
 <!doctype html>
 <html>
     <head>
+        <link rel="stylesheet" href="main.css"/>
     </head>
     <body ng-app="myApp" >
         <div ng-controller="userChoice">
-        <form >
-            <label for="productType">Pick a product category</label>
-            <select name="productType" ng-model="choice">
-                <option value="">Pick a product category</option>
-                <option value="blush">Blush</option>
-                <option value="bronzer">Bronzer</option>
-                <option value="eyebrow">Eyebrow</option>
-                <option value="eyeliner">Eyeliner</option>
-                <option value="eyeshadow">Eyeshadow</option>
-                <option value="foundation">Foundation</option>
-                <option value="lipliner">Lip liner</option>
-                <option value="lipstick">Lipstick</option>
-                <option value="mascara">Mascara</option>
-                <option value="nailpolish">Nail Polish</option>
-            </select>
-            <input type="submit" value="Get makeup info" ng-click="setChoice(choice)" ng-disabled="loading" />
-            <progress ng-show="loading"></progress>
-        </form>
-        <ul >
-          <li ng-repeat="product in products">
-            {{ product.name }}
-          </li>
-        </ul>
+            <form >
+                <label for="productType">Pick a product category</label>
+                <select name="productType" ng-model="choice">
+                    <option value="">Pick a product category</option>
+                    <option value="blush">Blush</option>
+                    <option value="bronzer">Bronzer</option>
+                    <option value="eyebrow">Eyebrow</option>
+                    <option value="eyeliner">Eyeliner</option>
+                    <option value="eyeshadow">Eyeshadow</option>
+                    <option value="foundation">Foundation</option>
+                    <option value="lipliner">Lip liner</option>
+                    <option value="lipstick">Lipstick</option>
+                    <option value="mascara">Mascara</option>
+                    <option value="nailpolish">Nail Polish</option>
+                </select>
+                <input type="submit" value="Get makeup info" ng-click="setChoice(choice)" ng-disabled="loading" />
+                <progress ng-show="loading"></progress>
+            </form>
+            
+            <div class="result-container" ng-repeat="product in products">
+                <h3 class="productBrand">{{product.brand | uppercase}}</h3>
+                <h4 class="productName">{{product.name}}</h4>
+                <img class="productImg" ng-src="{{product.image_link}}"/>
+                <p>{{product.description}}</p>
+                <p>{{product.price | currency}}</p>
             </div>
+        </div>
 <!--        <div ng-repeat="product in model">{{product}}</div>-->
         
         
