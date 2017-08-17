@@ -1,18 +1,20 @@
 <!doctype html>
 <html>
-    <head>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="main.css"/>
-    </head>
-    <body ng-app="myApp" >
-        <div ng-controller="userChoice" class="container">
-            <div class="row">
-                <div class="jumbotron text-center">
-                    <h1>Makeup Search By Category</h1>
-                </div>
-                <div class="col-md-4 col-md-offset-4">
-                    <form>
-                        <select class="form-control" name="productType" ng-model="choice">
+
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css" />
+</head>
+
+<body ng-app="myApp">
+    <div ng-controller="userChoiceController" class="container">
+        <div class="row">
+            <div class="jumbotron text-center">
+                <h1>Makeup Search By Category</h1>
+            </div>
+            <div class="col-md-4 col-md-offset-4">
+                <form>
+                    <select class="form-control" name="productType" ng-model="choice">
                             <option value="">Pick a product category</option>
                             <option value="blush">Blush</option>
                             <option value="bronzer">Bronzer</option>
@@ -26,48 +28,58 @@
                             <option value="nailpolish">Nail Polish</option>
                         </select>
 
-                        <button id="submitBtn" type="submit" class="btn btn-info " ng-click="setChoice(choice)" ng-disabled="loading">Find makeup info</button>
-                        <progress ng-show="loading"></progress>
-                    </form>
-                </div>
+                    <button id="submitBtn" type="submit" class="btn btn-info " ng-click="getChoice(choice)" ng-disabled="loading">Find makeup info</button>
+                    <progress ng-show="loading"></progress>
+                </form>
             </div>
-            <div class="row">
-                <div class="col-md-6" ng-repeat="product in products">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <!--                    <h3 class="productBrand">{{product.brand | uppercase}}</h3>-->
+        </div>
+        <div class="row">
+            
+            <!-- BEGIN PANEL ng-repeat -->
+            <div class="col-md-6" ng-repeat="product in products">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <img class="productImg" ng-src="{{product.image_link}}" />
+                            <div class="row">
+                                <div class="col-xs-3 col-sm-3 col-md 3" ng-repeat="color in product.product_colors">
+                                    <div class="colorDiv" style="background-color: {{color.hex_value}}"></div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <h4 class="productName">{{product.name}}</h4>
-                            <img class="productImg" ng-src="{{product.image_link}}"/>
                             <p>{{product.description}}</p>
                             <p>{{product.price | currency}}</p>
                         </div>
                     </div>
-
                 </div>
-                
-            </div>
-            
-            
-            
-            
+
+            </div> 
+            <!-- END PANEL ng-repeat -->
+
         </div>
-<!--        <div ng-repeat="product in model">{{product}}</div>-->
-        
-        
-        
-        
-        <!-- jQuery -->
-        <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
-        
-        <!-- Bootstrap -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        
-        <!-- AngularJS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-        
-        <script src="scripts/app.js"></script>
-    </body>
+
+
+
+
+    </div>
+    <!--        <div ng-repeat="product in model">{{product}}</div>-->
+
+
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+    <script src="scripts/app.js"></script>
+</body>
+
 </html>
