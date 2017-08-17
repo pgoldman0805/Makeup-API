@@ -2,21 +2,19 @@
 /*global console */
 (function () {
     "use strict";
-    var myApp;
-    myApp = angular.module("myApp", []);
-    
+    var myApp = angular.module("myApp", []);
+
     function getData($scope, $http, productType) {
         $scope.loading = true;
-        var baseUrl;
-        baseUrl = "http://makeup-api.herokuapp.com/api/v1/products.json?product_type=";
+        var baseUrl = "http://makeup-api.herokuapp.com/api/v1/products.json?product_type=";
 
         $http.get(baseUrl + productType).then(function (result) {
             $scope.products = result.data;
-            $scope.loading = false;
+            console.log($scope.products);
         }, function (error) {
             console.log(error.message);
-            $scope.loading = false;
         });
+        $scope.loading = false;
     }
 
     myApp.controller("userChoice", ["$scope", "$http", function ($scope, $http) {
