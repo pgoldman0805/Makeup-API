@@ -28,41 +28,46 @@
                             <option value="nailpolish">Nail Polish</option>
                         </select>
 
-                    <button id="submitBtn" type="submit" class="btn btn-info " ng-click="getChoice(choice)" ng-disabled="loading">Find makeup info</button>
-                    <progress ng-show="loading"></progress>
+                    <button id="submitBtn" type="submit" class="btn btn-primary btn-block" ng-click="getChoice(choice)" ng-disabled="loading">Find makeup info</button>
                 </form>
             </div>
         </div>
-        <div class="row">
-            
+        
+        <div class="loader" ng-show="loading"></div>
+
+        <div id="resultsContainer" class="row" ng-show="!loading">
+
+
+
             <!-- BEGIN PANEL ng-repeat -->
             <div class="col-md-6" ng-repeat="product in products">
                 <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="panel-body" style="max-height: 10;">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                             <img class="productImg" ng-src="{{product.image_link}}" />
-                            <div class="row">
-                                <div class="col-xs-3 col-sm-3 col-md 3" ng-repeat="color in product.product_colors">
-                                    <div class="colorDiv" style="background-color: {{color.hex_value}}"></div>
-                                </div>
-                            </div>
-                            
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <h4 class="productName">{{product.name}}</h4>
-                            <p>{{product.description}}</p>
-                            <p>{{product.price | currency}}</p>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-controller="productDescController">
+                            <h4 class="productName">{{product.name | toTitleCase}}</h4>
+                            <button id="showProductDesc" class="btn btn-info" ng-click="showDiv = !showDiv" ng-init="showDiv=false">Description</button>
+                            <div ng-show="showDiv" class="productDesc">
+                                <p>{{product.description }}</p>
+                            </div>
+                            <div class="productPrice">
+                                <h4 class="text-center">{{product.price | currency}}</h4>
+                            </div>
+                        </div>
+                        <div id="colorsContainer" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-repeat="color in product.product_colors">
+                                <div class="colorDiv" style="background-color: {{color.hex_value}}"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-            </div> 
+            </div>
             <!-- END PANEL ng-repeat -->
 
         </div>
-
-
-
 
     </div>
     <!--        <div ng-repeat="product in model">{{product}}</div>-->

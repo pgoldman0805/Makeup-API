@@ -2,20 +2,15 @@
 /*global console */
 (function () {
     "use strict";
-    var myApp = angular.module("myApp", []);
 
-    //    function getColors($scope, products) {
-    //        // find the product ID
-    //        $scope.colors = [];
-    //        $.each(products, function (index, value) {
-    //            $.each(value.product_colors, function (i, color) {
-    //                $scope.colors.push(color.hex_value);
-    //            });
-    //        });
-    //        
-    //
-    //        console.log("Colors:" + $scope.colors);
-    //    }
+
+    function toTitleCase(str) {
+        return str.replace(/\w\S*/g, function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+    }
+
+    var myApp = angular.module("myApp", []);
 
     function getData($scope, $http, productType) {
         $scope.loading = true;
@@ -24,18 +19,14 @@
         $http.get(baseUrl + productType).then(function (result) {
             $scope.products = result.data;
             console.log($scope.products);
+            $scope.loading = false;
         }, function (error) {
             console.log(error.message);
+            $scope.loading = false;
         });
 
-        $scope.loading = false;
+        
     }
-    
-//    function createColorDivs($scope, colorValueArray){
-//        $.each(colorValueArray, function (index, value) {
-//            var colorDiv = "<div class="
-//        })
-//    }
 
     myApp.controller("userChoiceController", ["$scope", "$http", function ($scope, $http) {
         $scope.choice = "";
@@ -45,14 +36,22 @@
         };
     }]);
 
-//    myApp.controller("colorController", ["$scope", function ($scope, product) {
-//        $scope.colors = [];
-//        $.each(product, function (index, value) {
-//            $scope.colors.push(value.hex_value);
-//        });
-//        //        $.each ($scope.colors, function (index, value){
-//        //            
-//        //        });
-//
-//    }]);
+//    myApp.controller("loaderController", function($scope){
+//        
+//    });
+    myApp.controller("productDescController", function ($scope) {
+        $scope.showDiv = !$scope.showDiv;
+    });
+
+    // CUSTOM FILTER TO TRANSFORM TEXT TO TITLE-CASE
+    // e.g. "tHe QUIck BROWN fox" ==> "The Quick Brown Fox"
+    myApp.filter('toTitleCase', function () {
+        return function (input) {
+            input = input || '';
+            return input.replace(/\w\S*/g, function (txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+        };
+    });
+
 }());

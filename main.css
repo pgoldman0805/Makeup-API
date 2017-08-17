@@ -1,27 +1,107 @@
-
 /*
 .result-container h3, .result-container h4{
     display: inline-block;
 }
 */
 
-#submitBtn {
-
+.hidden {
+    display: none;
 }
+
+#resultsContainer {
+    margin-top: 1.5em;
+}
+
+#submitBtn {
+    margin-top: 0.75em;
+}
+
+
+/*
+ * LOADER
+ */
+
+.loader {
+
+    border-top: 16px solid blue;
+    border-right: 16px solid green;
+    border-bottom: 16px solid red;
+    border-left: 16px solid pink;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    margin: 3em auto;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .productImg {
-    margin: 1.5em;
-    width: 15em;
-    height: 15em;
+    /*    margin: 1.5em;*/
+    width: 100%;
+    max-height: 200px;
+    
     display: inline-block;
     outline: 1px solid black;
     box-shadow: 3px 4px 4px black;
-    float: left;
+    margin-bottom: 1em;   
 }
 
-.panel-body{
+.productPrice {
+/*    opacity: 0.85;*/
+/*    position: absolute;*/
+/*    top: 127px;*/
+/*    left: 24px;*/
+    width: 70px;
+    height: 70px;
+    background-color: bisque;
+    border-radius: 50%;
+/*    z-index: 999 !important;*/
+}
+.productPrice h4 {
+    position: relative;
+    top: 35%;
+    z-index: 999 !important;
+}
+
+/*
+#colorsContainer {
+    padding-top: 12em;
+}
+*/
+.panel-body {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f7efff+0,f8f3ff+50,f7f1ff+60,faf7ff+100 */
+    background: rgb(247, 239, 255);
+    /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(247, 239, 255, 1) 0%, rgba(248, 243, 255, 1) 50%, rgba(247, 241, 255, 1) 60%, rgba(250, 247, 255, 1) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(247, 239, 255, 1) 0%, rgba(248, 243, 255, 1) 50%, rgba(247, 241, 255, 1) 60%, rgba(250, 247, 255, 1) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(247, 239, 255, 1) 0%, rgba(248, 243, 255, 1) 50%, rgba(247, 241, 255, 1) 60%, rgba(250, 247, 255, 1) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7efff', endColorstr='#faf7ff', GradientType=0);
+    /* IE6-9 */
     max-height: 400px;
     overflow-y: scroll;
 }
+
 .colorDiv {
     background-color: white;
     height: 20px;
