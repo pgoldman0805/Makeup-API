@@ -1,36 +1,108 @@
 <!doctype html>
-<html>
+<html ng-app="myApp">
 
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="main.css" />
 </head>
 
-<body ng-app="myApp">
+<body>
+    <div class="background-image"></div>
     <div ng-controller="userChoiceController" class="container">
+        <div class="jumbotron text-center">
+            <h1>Makeup Search</h1>
+<!--        </div>-->
         <div class="row">
-            <div class="jumbotron text-center">
-                <h1>Makeup Search By Category</h1>
-            </div>
-            <div class="col-md-4 col-md-offset-4">
-                <form>
-                    <select class="form-control" name="productType" ng-model="choice">
-                            <option value="">Pick a product category</option>
-                            <option value="blush">Blush</option>
-                            <option value="bronzer">Bronzer</option>
-                            <option value="eyebrow">Eyebrow</option>
-                            <option value="eyeliner">Eyeliner</option>
-                            <option value="eyeshadow">Eyeshadow</option>
-                            <option value="foundation">Foundation</option>
-                            <option value="lipliner">Lip liner</option>
-                            <option value="lipstick">Lipstick</option>
-                            <option value="mascara">Mascara</option>
-                            <option value="nailpolish">Nail Polish</option>
-                        </select>
+            
+            <div class="col-md-12 ">
+<!--                <div class="well">-->
+                    <form id="userForm">
+                        <div class="col-md-4">
+                            
+                            <select class="form-control" name="productType" ng-model="prodType">
+                                <option value="">Pick a product category</option>
+                                <option value="blush">Blush</option>
+                                <option value="bronzer">Bronzer</option>
+                                <option value="eyebrow">Eyebrow</option>
+                                <option value="eyeliner">Eyeliner</option>
+                                <option value="eyeshadow">Eyeshadow</option>
+                                <option value="foundation">Foundation</option>
+                                <option value="lipliner">Lip liner</option>
+                                <option value="lipstick">Lipstick</option>
+                                <option value="mascara">Mascara</option>
+                                <option value="nailpolish">Nail Polish</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4" >
+                            <select class="form-control" name="productBrand" ng-model="prodBrand">
+                                <option value="">Pick a brand</option>
+                                <option value="almay">Almay</option>
+                                <option value="anna sui">Anna Sui</option>
+                                <option value="annabelle">Annabelle</option>
+                                <option value="benefit">Benefit</option>
+                                <option value="burt's bees">Burt's Bees</option>
+                                <option value="butter london">Butter London</option>
+                                <option value="cargo cosmetics">Cargo Cosmetics</option>
+                                <option value="china glaze">China Glaze</option>
+                                <option value="covergirl">Covergirl</option>
+                                <option value="dalish">Dalish</option>
+                                <option value="dr. hauschka">Dr. Hauschka</option>
+                                <option value="e.l.f.">E.L.F.</option>
+                                <option value="essie">Essie</option>
+                                <option value="iman">Iman</option>
+                                <option value="l'oreal">L'oreal</option>
+                                <option value="marcelle">Marcelle</option>
+                                <option value="maybelline">Maybelline</option>
+                                <option value="milani">Milani</option>
+                                <option value="mineral fusion">Mineral Fusion</option>
+                                <option value="misa">Misa</option>
+                                <option value="mistura">Mistura</option>
+                                <option value="moov">Moov</option>
+                                <option value="nyx">Nyx</option>
+                                <option value="orly">Orly</option>
+                                <option value="pacifica">Pacifica</option>
+                                <option value="physicians formula">Physicians Formula</option>
+                                <option value="piggy paint">Piggy Paint</option>
+                                <option value="pure anada">Pure Anada</option>
+                                <option value="revlon">Revlon</option>
+                                <option value="salon perfect">Salon Perfect</option>
+                                <option value="sante">Sante</option>
+                                <option value="sinful colours">Sinful Colours</option>
+                                <option value="smashbox">Smashbox</option>
+                                <option value="stila">Stila</option>
+                                <option value="suncoat">Suncoat</option>
+                                <option value="wet n wild">Wet n Wild</option>
+                                <option value="zorah">Zorah</option>
+                            </select>
+                            
+                            <button id="submitBtn" type="submit" class="btn btn-primary btn-block" ng-click="getChoice(prodType,prodBrand)" ng-disabled="loading">Find makeup info</button>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Select tags</h4>
+                            <div class="form-group" ng-model="prodTags">
+<!--
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.canadian">Canadian</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.natural">Natural</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.sugar+free">Sugar Free</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.dairy+free">Dairy Free</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.non-gmo">Non-GMO</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.vegan">Vegan</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.fair+trade">Fair Trade</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.organic">Organic</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.gluten+free">Gluten Free</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.peanut+free+product">Peanut Free Product</label>
+-->
+                                <div ng-repeat="tag in prodTags" style="{display:inline}">
+                                    <label class="checkbox-inline"><input type="checkbox" ng-checked="tagExists(tag, selectedTags)" ng-click="toggleTag(tag, selectedTags)">{{tag}}</label>
+                                </div>
+                            </div>
+                        </div>
 
-                    <button id="submitBtn" type="submit" class="btn btn-primary btn-block" ng-click="getChoice(choice)" ng-disabled="loading">Find makeup info</button>
-                </form>
+                    </form>
+<!--                </div>-->
+                
             </div>
+        </div>
         </div>
         
         <div class="loader" ng-show="loading"></div>
@@ -42,25 +114,31 @@
             <!-- BEGIN PANEL ng-repeat -->
             <div class="col-md-6" ng-repeat="product in products">
                 <div class="panel panel-default">
-                    <div class="panel-body" style="max-height: 10;">
+                    <div class="panel-body">
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                             <img class="productImg" ng-src="{{product.image_link}}" />
+                            <div class="productRating" ng-show="">
+                                <span class="glyphicon glyphicon-star gold" aria-hidden="true"></span> {{product.rating}}
+                            </div>
+                            <div class="productPrice">
+                                <h4>{{product.price | currency}}</h4>
+                            </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-controller="productDescController">
-                            <h4 class="productName">{{product.name | toTitleCase}}</h4>
+                            <h3 class="productBrand"><a href="{{product.website_link}}" target="_blank">{{product.brand | uppercase}}</a></h3>
+                            <h4 class="productName"><a href="{{product.product_link}}" target="_blank">{{product.name | toTitleCase}}</a></h4>
                             <button id="showProductDesc" class="btn btn-info" ng-click="showDiv = !showDiv" ng-init="showDiv=false">Description</button>
                             <div ng-show="showDiv" class="productDesc">
                                 <p>{{product.description }}</p>
                             </div>
-                            <div class="productPrice">
-                                <h4 class="text-center">{{product.price | currency}}</h4>
+                            
+                            <div id="colorsContainer" >
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" ng-repeat="color in product.product_colors">
+                                    <div class="colorDiv" style="background-color: {{color.hex_value}}"></div>
+                                </div>
                             </div>
                         </div>
-                        <div id="colorsContainer" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-repeat="color in product.product_colors">
-                                <div class="colorDiv" style="background-color: {{color.hex_value}}"></div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -83,6 +161,9 @@
 
     <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    
+    <!-- AngularJS Router -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js" type="text/javascript"></script>
 
     <script src="scripts/app.js"></script>
 </body>

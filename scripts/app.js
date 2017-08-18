@@ -4,41 +4,94 @@
     "use strict";
 
 
-    function toTitleCase(str) {
-        return str.replace(/\w\S*/g, function (txt) {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        });
-    }
+    //    function toTitleCase(str) {
+    //        return str.replace(/\w\S*/g, function (txt) {
+    //            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    //        });
+    //    }
 
     var myApp = angular.module("myApp", []);
 
-    function getData($scope, $http, productType) {
-        $scope.loading = true;
-        var baseUrl = "http://makeup-api.herokuapp.com/api/v1/products.json?product_type=";
+    function constructUrl(productType, productBrand, productTags) {
 
-        $http.get(baseUrl + productType).then(function (result) {
+        //TODO: FIGURE OUT URL ENCODING FOR BRANDS WITH ' ' IN THEM
+
+        //process tags first
+        var tagsQueryString = "";
+        for (var i = 0; i < productTags.length; i++) {
+            tagsQueryString += productTags[i].replace(/\s/g, "+");
+            tagsQueryString += ",";
+        }
+
+        var baseUrl = "http://makeup-api.herokuapp.com/api/v1/products.json?product_type=";
+        baseUrl += productType;
+        baseUrl += "&brand=";
+        baseUrl += productBrand.replace(/\s/g, "+");
+        baseUrl += "&product_tags=";
+        baseUrl += tagsQueryString;
+        baseUrl = encodeURI(baseUrl);
+        
+        console.log(baseUrl);
+        return baseUrl;
+    }
+
+    function getData($scope, $http, productType, productBrand, productTags) {
+        $scope.dataLoaded = false;
+        $scope.loading = true;
+
+
+        $http.get(constructUrl(productType, productBrand, productTags)).then(function (result) {
             $scope.products = result.data;
             console.log($scope.products);
             $scope.loading = false;
+            $scope.dataLoaded = true;
         }, function (error) {
             console.log(error.message);
             $scope.loading = false;
         });
 
-        
+
     }
 
     myApp.controller("userChoiceController", ["$scope", "$http", function ($scope, $http) {
-        $scope.choice = "";
-        $scope.loading = false;
-        $scope.getChoice = function (userChoice) {
-            getData($scope, $http, $scope.choice);
+        $scope.prodType = "";
+        $scope.prodBrand = "";
+        $scope.prodTags = [
+            "canadian",
+            "natural",
+            "sugar free",
+            "dairy free",
+            "non-gmo",
+            "vegan",
+            "fair trade",
+            "organic",
+            "gluten free",
+            "peanut free product"
+        ];
+        $scope.selectedTags = [];
+
+
+        $scope.toggleTag = function (item, list) {
+            var idx = list.indexOf(item);
+            if (idx > -1) {
+                list.splice(idx, 1);
+            } else {
+                list.push(item);
+            }
+        };
+
+        $scope.tagExists = function (item, list) {
+            return list.indexOf(item) > -1;
+        };
+
+
+        $scope.dataLoaded = false;
+        $scope.getChoice = function (userProdType, userProdBrand, userProdTags) {
+            getData($scope, $http, $scope.prodType, $scope.prodBrand, $scope.selectedTags);
         };
     }]);
 
-//    myApp.controller("loaderController", function($scope){
-//        
-//    });
+
     myApp.controller("productDescController", function ($scope) {
         $scope.showDiv = !$scope.showDiv;
     });

@@ -1,8 +1,40 @@
-/*
-.result-container h3, .result-container h4{
-    display: inline-block;
+body {
+    background-image: url('images/bg-makeup.jpg');
+    filter: blur(url('images/bg-makeup.jpg'));
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: hard-light;
+    /*    opacity: 0.3;*/
 }
-*/
+
+.background-image {
+    margin: 0;
+    padding: 0;
+    background-image: url('images/bg-makeup.jpg');
+    background-size: cover;
+    display: block;
+/*    filter: blur(314px);*/
+/*    -webkit-filter: blur(314px);*/
+    position: fixed;
+    height: 100%;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.gold {
+    color: #8e8e0c;
+}
+
+.jumbotron {
+    opacity: 0.85;
+}
+
+a:hover {
+    text-decoration: none;
+}
 
 .hidden {
     display: none;
@@ -10,6 +42,10 @@
 
 #resultsContainer {
     margin-top: 1.5em;
+}
+
+#userForm div{
+/*    background-color: white;*/
 }
 
 #submitBtn {
@@ -22,7 +58,6 @@
  */
 
 .loader {
-
     border-top: 16px solid blue;
     border-right: 16px solid green;
     border-bottom: 16px solid red;
@@ -53,39 +88,26 @@
     }
 }
 
+.productBrand {
+    margin-top: -0.15em;
+}
+.productDesc {
+    margin-top: 0.75em;
+    text-align: justify;
+    text-overflow: ellipsis;
+}
+
 .productImg {
     /*    margin: 1.5em;*/
     width: 100%;
-    max-height: 200px;
-    
+    height: 250px;
     display: inline-block;
     outline: 1px solid black;
     box-shadow: 3px 4px 4px black;
-    margin-bottom: 1em;   
+    margin-bottom: 1em;
 }
 
-.productPrice {
-/*    opacity: 0.85;*/
-/*    position: absolute;*/
-/*    top: 127px;*/
-/*    left: 24px;*/
-    width: 70px;
-    height: 70px;
-    background-color: bisque;
-    border-radius: 50%;
-/*    z-index: 999 !important;*/
-}
-.productPrice h4 {
-    position: relative;
-    top: 35%;
-    z-index: 999 !important;
-}
 
-/*
-#colorsContainer {
-    padding-top: 12em;
-}
-*/
 .panel-body {
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f7efff+0,f8f3ff+50,f7f1ff+60,faf7ff+100 */
     background: rgb(247, 239, 255);
@@ -98,12 +120,30 @@
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7efff', endColorstr='#faf7ff', GradientType=0);
     /* IE6-9 */
-    max-height: 400px;
-    overflow-y: scroll;
+    height: auto;
+    min-height: 350px;
+    height: auto !important;
+    /* for IE as it does not support min-height */
+/*    height: 300px;*/
+    overflow-y:scroll;
+    outline: 1px solid #222;
+}
+
+/*
+.panel-body:hover {
+    outline: 1px solid #222;
+    transition: 1.8s ease;
+}
+*/
+
+#colorsContainer {
+    margin-top: 1em;
+    max-height: 200px;
 }
 
 .colorDiv {
     background-color: white;
-    height: 20px;
+    height: 15px;
     margin: 0 3px 3px 3px;
+/*    outline: 1px solid #bbb;*/
 }
