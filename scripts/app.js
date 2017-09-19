@@ -23,7 +23,7 @@
             tagsQueryString += ",";
         }
 
-        var baseUrl = "http://makeup-api.herokuapp.com/api/v1/products.json?product_type=";
+        var baseUrl = "https://makeup-api.herokuapp.com/api/v1/products.json?product_type=";
         baseUrl += productType;
         baseUrl += "&product_tags=";
         baseUrl += tagsQueryString;
