@@ -33,7 +33,29 @@
                                 <option value="nailpolish">Nail Polish</option>
                             </select>
                         </div>
+                        
+                        <div class="col-md-4">
+                            <h4>Select tags</h4>
+                            <div class="form-group" ng-model="prodTags">
+<!--
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.canadian">Canadian</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.natural">Natural</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.sugar+free">Sugar Free</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.dairy+free">Dairy Free</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.non-gmo">Non-GMO</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.vegan">Vegan</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.fair+trade">Fair Trade</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.organic">Organic</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.gluten+free">Gluten Free</label>
+                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.peanut+free+product">Peanut Free Product</label>
+-->
+                                <div ng-repeat="tag in prodTags" style="{display:inline}">
+                                    <label class="checkbox-inline"><input type="checkbox" ng-checked="tagExists(tag, selectedTags)" ng-click="toggleTag(tag, selectedTags)">{{tag}}</label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-4" >
+<!--
                             <select class="form-control" name="productBrand" ng-model="prodBrand">
                                 <option value="">Pick a brand</option>
                                 <option value="almay">Almay</option>
@@ -74,28 +96,9 @@
                                 <option value="wet n wild">Wet n Wild</option>
                                 <option value="zorah">Zorah</option>
                             </select>
-                            
-                            <button id="submitBtn" type="submit" class="btn btn-primary btn-block" ng-click="getChoice(prodType,prodBrand)" ng-disabled="loading">Find makeup info</button>
-                        </div>
-                        <div class="col-md-4">
-                            <h4>Select tags</h4>
-                            <div class="form-group" ng-model="prodTags">
-<!--
-                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.canadian">Canadian</label>
-                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.natural">Natural</label>
-                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.sugar+free">Sugar Free</label>
-                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.dairy+free">Dairy Free</label>
-                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.non-gmo">Non-GMO</label>
-                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.vegan">Vegan</label>
-                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.fair+trade">Fair Trade</label>
-                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.organic">Organic</label>
-                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.gluten+free">Gluten Free</label>
-                                <label class="checkbox-inline"><input type="checkbox" ng-model="prodTags.peanut+free+product">Peanut Free Product</label>
 -->
-                                <div ng-repeat="tag in prodTags" style="{display:inline}">
-                                    <label class="checkbox-inline"><input type="checkbox" ng-checked="tagExists(tag, selectedTags)" ng-click="toggleTag(tag, selectedTags)">{{tag}}</label>
-                                </div>
-                            </div>
+                            
+                            <button id="submitBtn" type="submit" class="btn btn-primary btn-block" ng-click="getChoice(prodType)" ng-disabled="loading">Find makeup info</button>
                         </div>
 
                     </form>

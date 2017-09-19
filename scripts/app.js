@@ -12,7 +12,7 @@
 
     var myApp = angular.module("myApp", []);
 
-    function constructUrl(productType, productBrand, productTags) {
+    function constructUrl(productType, productTags) {
 
         //TODO: FIGURE OUT URL ENCODING FOR BRANDS WITH ' ' IN THEM
 
@@ -25,8 +25,6 @@
 
         var baseUrl = "http://makeup-api.herokuapp.com/api/v1/products.json?product_type=";
         baseUrl += productType;
-        baseUrl += "&brand=";
-        baseUrl += productBrand.replace(/\s/g, "+");
         baseUrl += "&product_tags=";
         baseUrl += tagsQueryString;
         baseUrl = encodeURI(baseUrl);
@@ -35,12 +33,12 @@
         return baseUrl;
     }
 
-    function getData($scope, $http, productType, productBrand, productTags) {
+    function getData($scope, $http, productType, productTags) {
         $scope.dataLoaded = false;
         $scope.loading = true;
 
 
-        $http.get(constructUrl(productType, productBrand, productTags)).then(function (result) {
+        $http.get(constructUrl(productType, productTags)).then(function (result) {
             $scope.products = result.data;
             console.log($scope.products);
             $scope.loading = false;
@@ -55,7 +53,6 @@
 
     myApp.controller("userChoiceController", ["$scope", "$http", function ($scope, $http) {
         $scope.prodType = "";
-        $scope.prodBrand = "";
         $scope.prodTags = [
             "canadian",
             "natural",
@@ -84,10 +81,9 @@
             return list.indexOf(item) > -1;
         };
 
-
         $scope.dataLoaded = false;
-        $scope.getChoice = function (userProdType, userProdBrand, userProdTags) {
-            getData($scope, $http, $scope.prodType, $scope.prodBrand, $scope.selectedTags);
+        $scope.getChoice = function (userProdType, userProdTags) {
+            getData($scope, $http, $scope.prodType, $scope.selectedTags);
         };
     }]);
 
